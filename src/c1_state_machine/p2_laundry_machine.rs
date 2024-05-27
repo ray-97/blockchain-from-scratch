@@ -40,7 +40,84 @@ impl StateMachine for ClothesMachine {
     type Transition = ClothesAction;
 
     fn next_state(starting_state: &ClothesState, t: &ClothesAction) -> ClothesState {
-        todo!("Exercise 3")
+        match starting_state {
+            &ClothesState::Clean(life) => {
+                match t {
+                    ClothesAction::Wear => {
+                        if life == 1 {
+                            ClothesState::Tattered
+                        } else {
+                            ClothesState::Dirty(life - 1)
+                        }
+                    },
+                    ClothesAction::Wash => {
+                        if life == 1 {
+                            ClothesState::Tattered
+                        } else {
+                            ClothesState::Wet(life - 1)
+                        }
+                    },
+                    ClothesAction::Dry => {
+                        if life == 1 {
+                            ClothesState::Tattered
+                        } else {
+                            ClothesState::Clean(life - 1)
+                        }
+                    },
+                }
+            },
+            &ClothesState::Dirty(life) => {
+                match t {
+                    ClothesAction::Wear => {
+                        if life == 1 {
+                            ClothesState::Tattered
+                        } else {
+                            ClothesState::Dirty(life - 1)
+                        }
+                    },
+                    ClothesAction::Wash => {
+                        if life == 1 {
+                            ClothesState::Tattered
+                        } else {
+                            ClothesState::Wet(life - 1)
+                        }
+                    },
+                    ClothesAction::Dry => {
+                        if life == 1 {
+                            ClothesState::Tattered
+                        } else {
+                            ClothesState::Dirty(life - 1)
+                        }
+                    },
+                }
+            },
+            &ClothesState::Wet(life) => {
+                match t {
+                    ClothesAction::Wear => {
+                        if life == 1 {
+                            ClothesState::Tattered
+                        } else {
+                            ClothesState::Dirty(life - 1)
+                        }
+                    },
+                    ClothesAction::Wash => {
+                        if life == 1 {
+                            ClothesState::Tattered
+                        } else {
+                            ClothesState::Wet(life - 1)
+                        }
+                    },
+                    ClothesAction::Dry => {
+                        if life == 1 {
+                            ClothesState::Tattered
+                        } else {
+                            ClothesState::Clean(life - 1)
+                        }
+                    },
+                }
+            },
+            ClothesState::Tattered => ClothesState::Tattered,
+        }
     }
 }
 
